@@ -49,11 +49,13 @@ const globalErrorHandler = (err: any, req: Request, res: Response, next: NextFun
     }
 
     return res.status(statusCode).json({
-        status_code: statusCode,
         success: false,
+        status: statusCode,
         message,
-        errorSources,
-        stack: config.node_env === "development" ? err?.stack : null,
+        stack:
+            config.node_env === "development"
+                ? err?.stack
+                : "Optional stack trace shown only in development",
     });
 };
 

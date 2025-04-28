@@ -2,7 +2,6 @@
 /* eslint-disable no-unused-vars */
 import express, { Application, NextFunction, Request, Response } from "express";
 import cors from "cors";
-
 import globalErrorHandler from "./app/middlewares/globalErrorHandler";
 import cookieParser from "cookie-parser";
 import notFound from "./app/middlewares/notFound";
@@ -34,7 +33,7 @@ app.get("/", (req: Request, res: Response) => {
 });
 
 //api versions
-app.use("/api/v1", router);
+app.use("/api", router);
 
 app.use(globalErrorHandler as (err: any, req: Request, res: Response, next: NextFunction) => any);
 
