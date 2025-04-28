@@ -11,7 +11,7 @@ const createCustomerIntoDB = async (payload: { name: string; email: string; phon
 
         return result;
     } catch (error) {
-        throw new AppError(httpStatus.UNPROCESSABLE_ENTITY, "Could not create new customer");
+        throw new AppError(httpStatus.UNPROCESSABLE_ENTITY, "Could not create new record");
     }
 };
 

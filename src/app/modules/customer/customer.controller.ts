@@ -8,7 +8,7 @@ const createCustomer = catchAsync(async (req, res) => {
     const result = await CustomerServices.createCustomerIntoDB(customerData);
 
     sendResponse(res, {
-        statusCode: httpStatus.CREATED,
+        statusCode: httpStatus.OK,
         success: true,
         message: "Customer created successfully",
         data: result,
