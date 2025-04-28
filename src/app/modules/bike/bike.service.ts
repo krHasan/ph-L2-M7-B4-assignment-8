@@ -15,7 +15,6 @@ const createBikeIntoDB = async (payload: {
     });
 
     if (!isCustomerExists) {
-        console.log(isCustomerExists);
         throw new AppError(httpStatus.NOT_FOUND, "Customer not found");
     }
 
