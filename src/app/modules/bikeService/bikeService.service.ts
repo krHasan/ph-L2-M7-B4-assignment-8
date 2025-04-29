@@ -1,4 +1,4 @@
-import { ServiceRecord, ServiceStatus } from "@prisma/client";
+import { ServiceRecord } from "@prisma/client";
 import prisma from "../../config/prisma";
 import AppError from "../../errors/AppError";
 import { httpStatus } from "../../utils/httpStatus";
@@ -8,7 +8,7 @@ const createServiceRecordIntoDB = async (payload: {
     bikeId: string;
     serviceDate: Date;
     description: string;
-    status: ServiceStatus;
+    status: "pending" | "in-progress" | "done";
 }) => {
     const isBikeDataExists = await prisma.bike.findFirst({
         where: {
@@ -38,7 +38,7 @@ const getServiceRecordStatusFromDB = async () => {
 
     const result = await prisma.serviceRecord.findMany({
         where: {
-            OR: [{ status: ServiceStatus.pending }, { status: ServiceStatus.in_progress }],
+            OR: [{ status: "pending" }, { status: "in-progress" }],
             serviceDate: {
                 lt: sevenDaysAgo,
             },
@@ -73,13 +73,14 @@ const updateServiceRecordDataIntoDB = async (id: string, payload: Partial<Servic
         throw new AppError(httpStatus.NOT_FOUND, "Service Record not found");
     }
 
+    console.log(payload.completionDate);
     const result = await prisma.serviceRecord.update({
         where: {
             serviceId: id,
         },
         data: {
             completionDate: payload.completionDate,
-            status: ServiceStatus.done,
+            status: "done",
         },
     });
 

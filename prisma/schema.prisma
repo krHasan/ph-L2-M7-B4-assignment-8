@@ -11,6 +11,7 @@ generator client {
 datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
+  // directUrl = env("DIRECT_URL")
 }
 
 model Customer {
@@ -39,20 +40,14 @@ model Bike {
 }
 
 model ServiceRecord {
-  serviceId      String        @id @default(uuid())
+  serviceId      String    @id @default(uuid())
   bikeId         String
   serviceDate    DateTime
   completionDate DateTime?
   description    String
-  status         ServiceStatus
+  status         String
 
   bike Bike @relation(fields: [bikeId], references: [bikeId])
 
   @@map("service_records")
-}
-
-enum ServiceStatus {
-  pending
-  in_progress
-  done
 }

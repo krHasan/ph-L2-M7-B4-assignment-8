@@ -50,10 +50,9 @@ const getServiceRecordById = catchAsync(async (req, res) => {
 
 const updateServiceRecordData = catchAsync(async (req, res) => {
     const completionDate = req.body?.completionDate ? req.body?.completionDate : new Date();
-    const result = await ServiceRecordServices.updateServiceRecordDataIntoDB(
-        req.params.id,
-        completionDate
-    );
+    const result = await ServiceRecordServices.updateServiceRecordDataIntoDB(req.params.id, {
+        completionDate,
+    });
 
     sendResponse(res, {
         statusCode: httpStatus.OK,

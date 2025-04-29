@@ -1,11 +1,12 @@
 {
-    "name": "mission_7_assignment_8",
+    "name": "mission-7-assignment-8",
     "version": "1.0.0",
     "description": "",
     "main": "index.js",
     "scripts": {
         "dev": "ts-node-dev --respawn --transpile-only src/server.ts",
         "prod": "NODE_ENV=production node ./dist/server.js",
+        "postinstall": "prisma generate",
         "build": "tsc",
         "test": "echo \"Error: no test specified\" && exit 1"
     },
